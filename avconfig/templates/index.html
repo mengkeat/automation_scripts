@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AV Config Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AV Config Manager</h1>
+            <p>Manage your YAML configuration files with ease</p>
+        </header>
+
+        <main>
+            <!-- Root Directory Configuration -->
+            <section class="section">
+                <h2>Configuration</h2>
+                <div class="form-group">
+                    <label for="rootPath">Root Directory Path:</label>
+                    <input type="text" id="rootPath" placeholder="Enter root directory path...">
+                    <button id="setRootBtn" class="btn btn-primary">Set Root</button>
+                </div>
+                <div id="rootStatus" class="status-message"></div>
+            </section>
+
+            <!-- File Browser -->
+            <section class="section">
+                <h2>YAML Files</h2>
+                <div class="controls">
+                    <button id="scanBtn" class="btn btn-secondary" disabled>Scan Files</button>
+                    <button id="selectAllBtn" class="btn btn-secondary" disabled>Select All</button>
+                    <button id="deselectAllBtn" class="btn btn-secondary" disabled>Deselect All</button>
+                </div>
+                <div id="fileList" class="file-list"></div>
+            </section>
+
+            <!-- Preview and Merge -->
+            <section class="section">
+                <h2>Preview & Merge</h2>
+                <div class="controls">
+                    <button id="previewBtn" class="btn btn-primary" disabled>Preview Selected</button>
+                    <button id="mergeBtn" class="btn btn-success" disabled>Merge to Master</button>
+                </div>
+                <div id="previewArea" class="preview-area"></div>
+            </section>
+
+            <!-- Master Configuration -->
+            <section class="section">
+                <h2>Master Configuration</h2>
+                <div class="controls">
+                    <button id="showMasterBtn" class="btn btn-secondary">Show Master Config</button>
+                </div>
+                <div id="masterConfig" class="config-display"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for conflicts -->
+    <div id="conflictModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Configuration Conflicts Detected</h3>
+            <p>The following keys already exist in the master configuration:</p>
+            <ul id="conflictList"></ul>
+            <div class="modal-actions">
+                <button id="proceedAnyway" class="btn btn-warning">Proceed Anyway</button>
+                <button id="cancelMerge" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
