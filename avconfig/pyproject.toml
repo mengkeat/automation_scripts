@@ -1,0 +1,10 @@
+[project]
+name = "avconfig"
+version = "0.1.0"
+dependencies = [
+    "Flask==2.3.3",
+    "PyYAML==6.0.1",
+]
+
+[tool.ruff]
+line-length = 88

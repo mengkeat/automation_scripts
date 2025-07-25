@@ -94,7 +94,7 @@ class AVConfigManager {
 
         fileList.innerHTML = files.map(file => `
             <div class="file-item">
-                <input type="checkbox" id="file-${file.path}" value="${file.path}" 
+                <input type="checkbox" id="file-${file.path}" value="${file.path}"
                        onchange="configManager.toggleFileSelection('${file.path}')">
                 <div class="file-info">
                     <div class="file-name">${file.name}</div>
@@ -112,7 +112,7 @@ class AVConfigManager {
         } else {
             this.selectedFiles.delete(filePath);
         }
-        
+
         this.updateSelectionButtons();
     }
 
@@ -161,11 +161,11 @@ class AVConfigManager {
 
             this.pendingMergeContent = result.content;
             const previewArea = document.getElementById('previewArea');
-            
+
             let previewText = '# Merged Configuration Preview\n\n';
             previewText += `Selected files: ${this.selectedFiles.size}\n`;
             previewText += `Conflicts detected: ${result.conflicts.length}\n\n`;
-            
+
             if (result.conflicts.length > 0) {
                 previewText += '## CONFLICTS:\n';
                 result.conflicts.forEach(conflict => {
@@ -173,7 +173,7 @@ class AVConfigManager {
                 });
                 previewText += '\n';
             }
-            
+
             previewText += '## Merged Content:\n';
             previewText += this.yamlToString(result.content);
 
@@ -205,7 +205,7 @@ class AVConfigManager {
             });
 
             const result = await response.json();
-            
+
             if (result.conflicts && result.conflicts.length > 0) {
                 this.showConflictModal(result.conflicts);
                 this.showLoading(false);
@@ -222,7 +222,7 @@ class AVConfigManager {
     showConflictModal(conflicts) {
         const modal = document.getElementById('conflictModal');
         const conflictList = document.getElementById('conflictList');
-        
+
         conflictList.innerHTML = conflicts.map(conflict => `<li>${conflict}</li>`).join('');
         modal.style.display = 'block';
     }
@@ -270,7 +270,7 @@ class AVConfigManager {
         try {
             const response = await fetch('/api/master_config');
             const result = await response.json();
-            
+
             const configDisplay = document.getElementById('masterConfig');
             if (Object.keys(result.config).length === 0) {
                 configDisplay.textContent = 'Master configuration is empty';
@@ -288,13 +288,13 @@ class AVConfigManager {
         if (obj === null || obj === undefined) return 'null';
         if (typeof obj === 'string') return obj;
         if (typeof obj === 'number' || typeof obj === 'boolean') return String(obj);
-        
+
         if (Array.isArray(obj)) {
-            return obj.map((item, index) => 
+            return obj.map((item, index) =>
                 '  '.repeat(indent) + `- ${this.yamlToString(item, indent + 1)}`
             ).join('\n');
         }
-        
+
         if (typeof obj === 'object') {
             return Object.entries(obj).map(([key, value]) => {
                 const spaces = '  '.repeat(indent);
@@ -305,7 +305,7 @@ class AVConfigManager {
                 }
             }).join('\n');
         }
-        
+
         return String(obj);
     }
 
@@ -321,7 +321,7 @@ class AVConfigManager {
         const statusElement = document.getElementById('rootStatus');
         statusElement.textContent = message;
         statusElement.className = `status-message ${type}`;
-        
+
         // Auto-hide success messages after 5 seconds
         if (type === 'success') {
             setTimeout(() => {
@@ -335,7 +335,7 @@ class AVConfigManager {
             const button = document.getElementById(id);
             if (button) button.disabled = false;
         });
-        
+
         disable.forEach(id => {
             const button = document.getElementById(id);
             if (button) button.disabled = true;

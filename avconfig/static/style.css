@@ -328,21 +328,21 @@ input[type="text"]:focus {
     .container {
         padding: 10px;
     }
-    
+
     .form-group {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .form-group label {
         min-width: auto;
         margin-bottom: 5px;
     }
-    
+
     .controls {
         flex-direction: column;
     }
-    
+
     .modal-content {
         width: 95%;
         margin: 10% auto;
