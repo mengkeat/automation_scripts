@@ -20,7 +20,6 @@ import sys
 import os
 import argparse
 import subprocess
-import glob
 from pathlib import Path
 import threading
 import time

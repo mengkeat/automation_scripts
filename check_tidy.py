@@ -8,7 +8,6 @@ import time
 from rich.live import Live
 from rich.panel import Panel
 from rich.progress import Progress, BarColumn, TextColumn, TaskProgressColumn
-from rich.console import Group
 from rich.text import Text
 from rich.layout import Layout
 import webbrowser
@@ -68,9 +67,6 @@ def main():
         with status_lock:
             log_text = "\n".join(log_lines[-30:])  # Show last 30 lines
             output_text = "\n".join(output_lines[-30:])  # Show last 30 outputs (now live)
-            running = list(status['running'])
-            done = status['done']
-            total = status['total']
         log_panel = Panel(Text(log_text), title="Build Log", border_style="blue", height=20)
         output_panel = Panel(Text(output_text), title="Build Output (Live)", border_style="green", height=20)
         layout = Layout()
@@ -87,7 +83,6 @@ def main():
         return root_layout
 
     def status_reporter(live):
-        last_done = 0
         while True:
             with status_lock:
                 done = status['done']
